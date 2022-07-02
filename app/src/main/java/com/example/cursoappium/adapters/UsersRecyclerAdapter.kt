@@ -34,13 +34,9 @@ class UsersRecyclerAdapter(private val listUsers: List<User>) : RecyclerView.Ada
      */
     inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        var textViewName: AppCompatTextView
-        var textViewEmail: AppCompatTextView
+        var textViewName: AppCompatTextView = view.findViewById<View>(R.id.textViewName) as AppCompatTextView
+        var textViewEmail: AppCompatTextView = view.findViewById<View>(R.id.textViewEmail) as AppCompatTextView
 
-        init {
-            textViewName = view.findViewById<View>(R.id.textViewName) as AppCompatTextView
-            textViewEmail = view.findViewById<View>(R.id.textViewEmail) as AppCompatTextView
-        }
     }
 
 

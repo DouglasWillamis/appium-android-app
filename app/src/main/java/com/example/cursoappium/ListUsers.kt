@@ -11,62 +11,50 @@ import com.example.cursoappium.adapters.UsersRecyclerAdapter
 import com.example.cursoappium.model.User
 import sql.DatabaseHelper
 
-class listarUsuarios : AppCompatActivity() {
+open class ListUsers : AppCompatActivity() {
 
-    private val activity = this@listarUsuarios
+    private val activity = this@ListUsers
     private lateinit var textViewName: AppCompatTextView
     private lateinit var recyclerViewUsers: RecyclerView
-    private lateinit var listUsers: MutableList<User>
-    private lateinit var usersRecyclerAdapter: UsersRecyclerAdapter
     private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_usuarios)
-//        supportActionBar!!.title = ""
         initViews()
         initObjects()
     }
 
     private fun initViews(){
-        textViewName = findViewById<View>(R.id.textViewName) as AppCompatTextView
-        recyclerViewUsers = findViewById<View>(R.id.recyclerViewUsers) as RecyclerView
+        textViewName = findViewById<AppCompatTextView>(R.id.textViewName)
+        // getting the recyclerview by its id
+        recyclerViewUsers = findViewById<RecyclerView>(R.id.recyclerViewUsers)
     }
 
     private fun initObjects(){
-        listUsers = ArrayList()
-        usersRecyclerAdapter = UsersRecyclerAdapter(listUsers)
-
-
-//        listUsers = databaseHelper.getAllUser() as MutableList<User>
-//        usersRecyclerAdapter = UsersRecyclerAdapter(listUsers)
-
+        // this creates a vertical layout Manager
         val mLayoutManager = LinearLayoutManager(applicationContext)
         recyclerViewUsers.layoutManager = mLayoutManager
+
+        // ArrayList of class ItemsViewModel
+        var listUsers = ArrayList<User>()
+        databaseHelper = DatabaseHelper(activity)
+        listUsers = databaseHelper.getAllUser() as ArrayList<User>
+
         recyclerViewUsers.itemAnimator = DefaultItemAnimator()
         recyclerViewUsers.setHasFixedSize(true)
-        recyclerViewUsers.adapter = usersRecyclerAdapter
-        databaseHelper = DatabaseHelper(activity)
+        val adapter = UsersRecyclerAdapter(listUsers)
+        recyclerViewUsers.adapter = adapter
 
 
-        val emailFromIntent = intent.getStringExtra("EMAIL")
-        textViewName.text = emailFromIntent
 
-        var getDataFromSQLite = GetDataFromSQLite()
-//        getDataFromSQLite.
-//        GetDataFromSQLite().doInBackground()
+//        val emailFromIntent = intent.getStringExtra("EMAIL")
+//        textViewName.text = emailFromIntent
 
-    }
-    inner class GetDataFromSQLite : AppCompatActivity(){
 
-        fun doInBackground(): List<User>{
-            return databaseHelper.getAllUser()
-        }
-
-//        override fun onPostExecute(result: List<User>?) {
-//            super.onPostExecute(result)
-//            listUsers.clear()
-//            listUsers.addAll(result!!)
-//        }
     }
 }
+
+
+
+

@@ -12,9 +12,9 @@ import com.example.cursoappium.model.User
 import com.google.android.material.snackbar.Snackbar
 import sql.DatabaseHelper
 
-class Register : AppCompatActivity(), View.OnClickListener {
+class RegisterUsers : AppCompatActivity(), View.OnClickListener {
 
-    private val activity = this@Register
+    private val activity = this@RegisterUsers
 
     private lateinit var viewMessage: View
 
@@ -110,7 +110,7 @@ class Register : AppCompatActivity(), View.OnClickListener {
 
             databaseHelper!!.addUser(user)
 
-            Snackbar.make(viewMessage!!, "Cadastro realizado com sucesso",
+            Snackbar.make(viewMessage!!, R.string.toast_message,
                     Snackbar.LENGTH_LONG).show()
                     emptyInputEditText()
 

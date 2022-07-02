@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         var btn_cadastrar = findViewById<Button>(R.id.button_cadastrar) as Button
         btn_cadastrar.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this, RegisterUsers::class.java)
             startActivity(intent)
         }
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         var btn_listar_cadastros = findViewById<Button>(R.id.button_listar) as Button
         btn_listar_cadastros.setOnClickListener {
-            val intent = Intent(this, listarUsuarios::class.java)
+            val intent = Intent(this, ListUsers::class.java)
             startActivity(intent)
         }
 
