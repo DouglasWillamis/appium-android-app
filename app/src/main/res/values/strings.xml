@@ -4,7 +4,7 @@
     <string name="sobre">Esta aplicação foi desenvolvida por Maria Clara para as aulas de automação do curso de Appium,
                          que está em: www.github.com/clarabez/appium</string>
     <string name="title_activity_register">Register</string>
-
+    <string name="toast_message">Cadastro realizado com sucesso</string>
     <string name="hint_name">Nome</string>
     <string name="hint_mail">Email</string>
     <string name="check_gender">Como você se identifica</string>
