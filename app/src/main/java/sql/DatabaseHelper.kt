@@ -42,7 +42,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         //Drop User Table if exist
         db.execSQL(DROP_USER_TABLE)
-
         // Create tables again
         onCreate(db)
 
@@ -75,8 +74,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 sortOrder)         //The sort order
         if (cursor.moveToFirst()) {
             do {
-                val user = User(id = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID)).toInt(),
-                                name = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)),
+                val user = User(name = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)),
                                 email = cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)))
 
                 userList.add(user)
