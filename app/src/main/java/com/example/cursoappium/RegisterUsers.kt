@@ -97,7 +97,7 @@ class RegisterUsers : AppCompatActivity(), View.OnClickListener {
                         "Insira o nome completo")){
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(textInputEmail, textInputLayoutEmail,
+        if (!inputValidation!!.isInputEditTextEmail(textInputEmail, textInputLayoutEmail,
                         "Insira um email válido")){
             return
         }

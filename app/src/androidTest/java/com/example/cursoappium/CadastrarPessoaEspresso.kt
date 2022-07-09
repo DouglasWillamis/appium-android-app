@@ -16,6 +16,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import junit.framework.Assert.assertTrue
+import junit.framework.TestCase
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
@@ -82,20 +83,52 @@ class CadastrarPessoaEspresso {
 
     @Test
     fun testBotaoVoltar(){
-        Espresso.onView(withId(R.id.BotaoVoltar))
+        Espresso.onView(withId(R.id.BotaoVoltar)).perform(click())
+        Espresso.onView(withText("ACESSAR O CURSO"))
     }
 
     @Test
     fun testCadastrarEmailInvalido(){
+        val randomName = getRandomString((5 until 15).random())
 
+        Espresso.onView(withId(R.id.TextInputNome))
+            .perform(typeText(randomName), closeSoftKeyboard())
+        Espresso.onView(withId(R.id.TextInputEmail))
+            .perform(typeText("$randomName.test.com"), closeSoftKeyboard())
+        Espresso.onView(withId(R.id.radioButton_mulher)).perform(click())
+        Espresso.onView(withId(R.id.spinner_estados)).perform(click())
+        Espresso.onView(withParentIndex((1 until 10).random())).perform(click())
+        Espresso.onView(withId(R.id.BotaoCadastrar)).perform(click())
+
+        Espresso.onView(withText("Insira um email válido")).check(matches(isDisplayed()))
     }
 
     @Test
     fun testCadastrarComNomeVazio(){
+        val randomName = getRandomString((5 until 15).random())
 
+        Espresso.onView(withId(R.id.TextInputEmail))
+            .perform(typeText("$randomName@test.com"), closeSoftKeyboard())
+        Espresso.onView(withId(R.id.radioButton_mulher)).perform(click())
+        Espresso.onView(withId(R.id.spinner_estados)).perform(click())
+        Espresso.onView(withParentIndex((1 until 10).random())).perform(click())
+        Espresso.onView(withId(R.id.BotaoCadastrar)).perform(click())
+
+        Espresso.onView(withText("Insira o nome completo")).check(matches(isDisplayed()))
     }
 
+    @Test
     fun testCadastrarComEmailVazio(){
+        val randomName = getRandomString((5 until 15).random())
 
+        Espresso.onView(withId(R.id.TextInputNome))
+            .perform(typeText(randomName), closeSoftKeyboard())
+        Espresso.onView(withId(R.id.radioButton_mulher)).perform(click())
+        Espresso.onView(withId(R.id.spinner_estados)).perform(click())
+        Espresso.onView(withParentIndex((1 until 10).random())).perform(click())
+        Espresso.onView(withId(R.id.BotaoCadastrar)).perform(click())
+
+        Espresso.onView(withText("Insira um email válido"))
+            .check(matches(isDisplayed()))
     }
 }
